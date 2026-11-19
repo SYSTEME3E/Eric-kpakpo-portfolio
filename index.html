@@ -61,6 +61,23 @@
   .link b { display:block; color:var(--blue); font-size:.85rem; letter-spacing:.06em; text-transform:uppercase; }
   footer { border-top:1px solid var(--line); padding:28px 0; color:var(--dim); font-size:.9rem; }
 
+
+  .packs { align-items:stretch; }
+  .pack { display:flex; flex-direction:column; position:relative; }
+  .pack.star { border-color:var(--yellow); }
+  .pack .flag { position:absolute; top:-12px; right:16px; background:var(--yellow); color:#000; font-weight:600; font-size:.8rem; padding:3px 12px; border-radius:20px; }
+  .pack .price { font:800 2rem 'Bricolage Grotesque', sans-serif; color:var(--white); margin:4px 0 2px; }
+  .pack .price small { font:600 1rem Manrope, sans-serif; color:var(--dim); }
+  .pack ul { list-style:none; margin:16px 0 20px; padding:0; color:var(--dim); font-size:.97rem; flex:1; }
+  .pack li { padding:5px 0 5px 24px; position:relative; }
+  .pack li::before { content:"\2713"; position:absolute; left:0; color:var(--yellow); font-weight:800; }
+  .pack .btn { text-align:center; }
+  .maint, .rules { margin-top:16px; }
+  h3.sub { font-size:1.5rem; margin:40px 0 0; }
+  .maint h3, .rules h3 { font-size:1.2rem; margin-bottom:8px; }
+  .rules ul { margin:0; padding-left:20px; color:var(--dim); }
+  @media (min-width:720px) { .packs { grid-template-columns:repeat(3,1fr); } }
+
   a:focus-visible, .btn:focus-visible { outline:3px solid var(--yellow); outline-offset:3px; }
   @media (min-width:720px) { .about { grid-template-columns:200px 1fr; } .grid { grid-template-columns:1fr 1fr; } #links { grid-template-columns:1fr 1fr; } section { padding:88px 0; } }
   @media (prefers-reduced-motion:no-preference) { .hero .wrap > * { animation:up .6s both; } .hero .wrap > *:nth-child(2) { animation-delay:.08s; } .hero .wrap > *:nth-child(3) { animation-delay:.16s; } .hero .wrap > *:nth-child(4) { animation-delay:.24s; } .hero .wrap > *:nth-child(5) { animation-delay:.32s; } }
@@ -120,7 +137,42 @@
         <article class="card"><svg class="ill" viewBox="0 0 400 200" role="img" aria-label="Illustration : fenêtre de navigateur avec du code"><rect width="400" height="200" fill="#101a30"/><circle cx="360" cy="20" r="90" fill="#2f80ff" opacity=".16"/><circle cx="30" cy="190" r="70" fill="#ffd60a" opacity=".08"/>
 <rect x="70" y="26" width="260" height="148" rx="12" fill="#0e1219" stroke="#2f80ff" stroke-width="3"/><path d="M70 38 a12 12 0 0 1 12 -12 h236 a12 12 0 0 1 12 12 v18 h-260 Z" fill="#1c2535"/>
 <circle cx="90" cy="41" r="5" fill="#ffd60a"/><circle cx="106" cy="41" r="5" fill="#fff"/><circle cx="122" cy="41" r="5" fill="#2f80ff"/><rect x="146" y="35" width="150" height="12" rx="6" fill="#0e1219"/>
-<polyline points="160,92 135,118 160,144" fill="none" stroke="#ffd60a" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/><polyline points="240,92 265,118 240,144" fill="none" stroke="#ffd60a" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/><line x1="213" y1="88" x2="187" y2="148" stroke="#fff" stroke-width="8" stroke-linecap="round"/></svg><span class="n">04</span><h3>Développement web</h3><p>Sites vitrines, portfolios, boutiques en ligne et applications web sur mesure.</p></article>
+<polyline points="160,92 135,118 160,144" fill="none" stroke="#ffd60a" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/><polyline points="240,92 265,118 240,144" fill="none" stroke="#ffd60a" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/><line x1="213" y1="88" x2="187" y2="148" stroke="#fff" stroke-width="8" stroke-linecap="round"/></svg><span class="n">04</span><h3>Développement web</h3><p>Sites vitrines, portfolios, boutiques en ligne et applications web sur mesure. <a href="#sites" style="color:var(--yellow)">Voir les tarifs</a></p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="sites">
+    <div class="wrap">
+      <h2>Création de sites web</h2>
+      <p class="dim">Des sites rapides, sur mesure et adaptés au mobile. Choisis le pack qui correspond à ton activité.</p>
+      <div class="grid packs">
+        <article class="card pack"><h3>Pack Basique</h3><p>Pour démarrer ta présence en ligne.</p><div class="price">50.000 <small>F CFA</small></div><ul><li>1 à 3 pages (Accueil, Services, Contact)</li><li>Design adapté au mobile</li><li>Bouton WhatsApp + formulaire de contact</li><li>Mise en ligne incluse</li><li>1 série de modifications après livraison</li><li>Délai : 5 à 7 jours</li></ul><a class="btn y pack-cta" data-pack="Pack Basique" href="#contact">Choisir ce pack</a></article>
+        <article class="card pack star"><span class="flag">Le plus choisi</span><h3>Pack Standard</h3><p>Pour attirer des clients grâce à Google.</p><div class="price">120.000 <small>F CFA</small></div><ul><li>Jusqu’à 6 pages (Galerie, À propos, Témoignages)</li><li>Google Maps et réseaux sociaux</li><li>SEO de base + Google Search Console</li><li>Fiche Google Business configurée</li><li>2 séries de modifications</li><li>1 mois de support offert</li><li>Délai : 10 à 14 jours</li></ul><a class="btn y pack-cta" data-pack="Pack Standard" href="#contact">Choisir ce pack</a></article>
+        <article class="card pack"><h3>Pack Premium</h3><p>Pour les entreprises qui veulent se démarquer.</p><div class="price">300.000 <small>F CFA</small></div><ul><li>Jusqu’à 10 pages, design sur mesure + animations</li><li>Catalogue produits avec commande WhatsApp</li><li>Rédaction des textes incluse</li><li>Modification autonome via CMS + formation 1 h</li><li>Nom de domaine + hébergement la 1re année</li><li>Statistiques de visite</li><li>6 mois de support offerts</li><li>Délai : 3 semaines</li></ul><a class="btn y pack-cta" data-pack="Pack Premium" href="#contact">Choisir ce pack</a></article>
+      </div>
+      <h3 class="sub">Autres projets sur mesure</h3>
+      <div class="grid packs">
+        <article class="card pack"><h3>Petite boutique personnelle</h3><p>Ta boutique en ligne simple, avec catalogue et commande.</p><div class="price">150.000 <small>F CFA</small></div><a class="btn y pack-cta" data-pack="Petite boutique personnelle" href="#contact">Demander ce service</a></article>
+        <article class="card pack"><h3>Logiciel de gestion</h3><p>Stock, ventes, clients, factures : un outil adapté à ton activité.</p><div class="price"><small>À partir de</small> 100.000 <small>F CFA</small></div><a class="btn y pack-cta" data-pack="Logiciel de gestion" href="#contact">Demander ce service</a></article>
+        <article class="card pack"><h3>Plateforme</h3><p>Plateforme web complète avec comptes utilisateurs et base de données.</p><div class="price"><small>À partir de</small> 400.000 <small>F CFA</small></div><a class="btn y pack-cta" data-pack="Plateforme" href="#contact">Demander ce service</a></article>
+      </div>
+      <div class="card maint">
+        <h3>Maintenance</h3>
+        <p><b>À partir de 10.000 F</b> par maintenance : corrections, mises à jour et sauvegardes. Le prix final dépend de la taille du site.</p>
+      </div>
+      <div class="card maint">
+        <h3>Nom de domaine et serveur</h3>
+        <p><b>Nom de domaine : 5.000 F</b> pour la première année.<br><b>Serveur :</b> cela dépend du projet. Un petit site est hébergé gratuitement. Un site avec base de données demande un serveur payant, à partir de <b>50.000 F/an</b>.</p>
+      </div>
+      <div class="card rules">
+        <h3>À savoir</h3>
+        <ul>
+          <li>Paiement : 50 % à la commande, 50 % à la livraison.</li>
+          <li>Tu fournis les textes et photos (sinon, supplément selon le pack).</li>
+          <li>Nom de domaine : 5.000 F la première année. Serveur selon le projet (gratuit pour un petit site).</li>
+          <li>Les modifications au-delà du forfait sont facturées à la tâche.</li>
+        </ul>
       </div>
     </div>
   </section>
@@ -201,6 +253,13 @@ if (CONTACT.whatsapp) {
   const m = document.getElementById('cta-main');
   m.href = /^https?:/.test(CONTACT.whatsapp) ? CONTACT.whatsapp : 'https://wa.me/' + CONTACT.whatsapp.replace(/\D/g, ''); m.textContent = 'Écrire sur WhatsApp'; m.target = '_blank'; m.rel = 'noopener';
 }
+document.querySelectorAll('.pack-cta').forEach((a) => {
+  if (!CONTACT.whatsapp) return;
+  const base = /^https?:/.test(CONTACT.whatsapp) ? CONTACT.whatsapp : 'https://wa.me/' + CONTACT.whatsapp.replace(/\D/g, '');
+  const msg = 'Bonjour Eric, je suis intéressé par le ' + a.dataset.pack + ' (création de site web).';
+  a.href = base + (base.includes('?') ? '&' : '?') + 'text=' + encodeURIComponent(msg);
+  a.target = '_blank'; a.rel = 'noopener';
+});
 document.getElementById('year').textContent = new Date().getFullYear();
 </script>
 </body>
