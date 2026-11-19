@@ -9,9 +9,13 @@
 <meta property="og:title" content="Eric Kpakpo · Marketing digital, e-commerce et développement web">
 <meta property="og:description" content="Formations e-commerce (achat en Chine), Facebook Ads, marketing digital et création de sites web.">
 <meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta name="twitter:card" content="summary_large_image">
+<!-- AJOUTE ICI ton image de partage (1200x630, lien complet) : <meta property="og:image" content="https://TON-DOMAINE/og-image.jpg"> -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800&family=Manrope:wght@400;600&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add("js")</script>
 <style>
   :root { --bg:#050608; --card:#0e1219; --line:#1c2535; --blue:#2f80ff; --yellow:#ffd60a; --white:#fff; --dim:#aab4c3; }
   * { box-sizing:border-box; }
@@ -78,6 +82,94 @@
   .rules ul { margin:0; padding-left:20px; color:var(--dim); }
   @media (min-width:720px) { .packs { grid-template-columns:repeat(3,1fr); } }
 
+
+  /* Boutons bleus animés */
+  .btn { position:relative; overflow:hidden; }
+  .btn.y { background:var(--blue); color:#fff; border-color:var(--blue); box-shadow:0 0 0 0 rgba(47,128,255,.6); }
+  .btn.o { border-color:var(--yellow); }
+  .btn:hover { transform:translateY(-3px) scale(1.03); }
+  .btn.y:hover { background:#4d93ff; border-color:#4d93ff; }
+  .btn.y::after { content:""; position:absolute; top:0; left:-60%; width:40%; height:100%; background:linear-gradient(100deg, transparent, rgba(255,255,255,.45), transparent); transform:skewX(-20deg); }
+  .pack:hover { border-color:var(--blue); transform:translateY(-6px); }
+  .card { transition:transform .25s, border-color .25s, box-shadow .25s; }
+  .card:hover { box-shadow:0 12px 32px rgba(47,128,255,.18); }
+  .ill { transition:transform .4s; }
+  .card:hover .ill { transform:scale(1.03); }
+
+  /* Animations au scroll */
+  .js .reveal { opacity:0; transform:translateY(32px); transition:opacity .7s ease, transform .7s ease; transition-delay:var(--d,0s); }
+  .js .reveal.in { opacity:1; transform:none; }
+  .js h2.reveal::after { width:0; transition:width .8s ease .3s; }
+  .js h2.reveal.in::after { width:56px; }
+  .js .from-left { transform:translateX(-40px); }
+  .js .from-left.in { transform:none; }
+  .js .about-photo.reveal { transform:scale(.7); }
+  .js .about-photo.reveal.in { transform:none; }
+  #progress { position:fixed; top:0; left:0; height:4px; width:0; background:linear-gradient(90deg, var(--blue), var(--yellow)); z-index:50; }
+
+  @media (prefers-reduced-motion:no-preference) {
+    .btn.y { animation:pulse 2.2s infinite; }
+    .btn.y::after { animation:shine 3s infinite; }
+    .ill { animation:float 5s ease-in-out infinite; }
+    .hero { background-size:130% 130%; animation:glow 8s ease-in-out infinite alternate; }
+    .pack .flag { animation:bob 2s ease-in-out infinite; }
+  }
+  @keyframes pulse { 0% { box-shadow:0 0 0 0 rgba(47,128,255,.6); } 70% { box-shadow:0 0 0 14px rgba(47,128,255,0); } 100% { box-shadow:0 0 0 0 rgba(47,128,255,0); } }
+  @keyframes shine { 0%, 60% { left:-60%; } 100% { left:130%; } }
+  @keyframes float { 0%, 100% { transform:translateY(0); } 50% { transform:translateY(-6px); } }
+  @keyframes glow { from { background-position:0% 0%; } to { background-position:30% 20%; } }
+  @keyframes bob { 0%, 100% { transform:translateY(0); } 50% { transform:translateY(-4px); } }
+  @media (prefers-reduced-motion:reduce) { .js .reveal { opacity:1; transform:none; transition:none; } #progress { display:none; } }
+
+
+  /* Menu à droite */
+  #menu-btn { position:fixed; top:14px; right:14px; z-index:60; width:48px; height:48px; border-radius:12px; border:1px solid var(--line); background:rgba(14,18,25,.9); backdrop-filter:blur(8px); cursor:pointer; display:flex; flex-direction:column; gap:5px; align-items:center; justify-content:center; }
+  #menu-btn span { width:22px; height:3px; background:var(--white); border-radius:2px; transition:transform .25s, opacity .2s; }
+  #menu-btn[aria-expanded="true"] span:nth-child(1) { transform:translateY(8px) rotate(45deg); }
+  #menu-btn[aria-expanded="true"] span:nth-child(2) { opacity:0; }
+  #menu-btn[aria-expanded="true"] span:nth-child(3) { transform:translateY(-8px) rotate(-45deg); }
+  #overlay { position:fixed; inset:0; background:rgba(0,0,0,.6); opacity:0; pointer-events:none; transition:opacity .3s; z-index:65; }
+  #overlay.open { opacity:1; pointer-events:auto; }
+  #menu { position:fixed; top:0; right:0; height:100%; width:min(320px,85vw); background:var(--card); border-left:1px solid var(--line); z-index:70; padding:80px 24px 24px; display:flex; flex-direction:column; gap:6px; transform:translateX(100%); transition:transform .35s ease; overflow-y:auto; }
+  #menu.open { transform:none; }
+  #menu a:not(.btn) { color:var(--white); text-decoration:none; font:700 1.25rem 'Bricolage Grotesque', sans-serif; padding:12px 8px; border-bottom:1px solid var(--line); }
+  #menu a:not(.btn):hover { color:var(--yellow); }
+  #menu .btn { text-align:center; margin-top:18px; }
+  .wa-float { position:fixed; right:16px; bottom:16px; z-index:55; width:58px; height:58px; border-radius:50%; background:#25d366; display:grid; place-items:center; box-shadow:0 6px 20px rgba(0,0,0,.4); }
+  .wa-float svg { width:32px; height:32px; }
+  .stat { text-align:center; }
+  .stat b { display:block; font:800 2.4rem 'Bricolage Grotesque', sans-serif; color:var(--yellow); }
+  .stat span { color:var(--dim); font-size:.95rem; }
+  #stats { grid-template-columns:1fr 1fr; }
+  .launch { border-color:var(--yellow); background:linear-gradient(90deg, rgba(255,214,10,.12), var(--card)); margin-top:24px; }
+  .launch p { color:var(--white); }
+  .pay { margin-top:16px; align-items:center; }
+  .proj .ph { height:140px; border-radius:10px; margin-bottom:14px; background:linear-gradient(135deg,#101a30,#1c2535); display:grid; place-items:center; color:var(--dim); font-size:.9rem; overflow:hidden; }
+  .proj .ph img { width:100%; height:100%; object-fit:cover; }
+  .proj a { color:var(--yellow); }
+  .quote p { color:var(--white); font-style:italic; }
+  .quote b { color:var(--yellow); font-style:normal; }
+  details.card { padding:0; margin-bottom:12px; }
+  details summary { cursor:pointer; padding:18px 24px; font-weight:600; list-style:none; display:flex; justify-content:space-between; gap:12px; }
+  details summary::after { content:"+"; color:var(--yellow); font-size:1.4rem; line-height:1; transition:transform .25s; }
+  details[open] summary::after { transform:rotate(45deg); }
+  details p { padding:0 24px 20px; }
+  @media (min-width:720px) { #stats { grid-template-columns:repeat(4,1fr); } }
+  @media (prefers-reduced-motion:no-preference) { .wa-float { animation:pulse 2.2s infinite; } }
+
+
+  .payzone { margin-top:28px; }
+  .marquee { overflow:hidden; border:1px solid var(--line); border-radius:14px; background:var(--card); padding:14px 0; -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent); mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent); }
+  .track { display:flex; gap:14px; width:max-content; }
+  .pm { display:flex; align-items:center; gap:10px; background:#0a0d13; border:1px solid var(--line); border-radius:12px; padding:8px 16px 8px 8px; white-space:nowrap; }
+  .pm i { width:40px; height:40px; border-radius:10px; display:grid; place-items:center; font:800 .8rem 'Bricolage Grotesque', sans-serif; font-style:normal; letter-spacing:-.02em; }
+  .pm .plogo { height:40px; width:auto; max-width:96px; object-fit:contain; border-radius:8px; background:#fff; padding:3px; }
+  .pm span { font-weight:600; font-size:.95rem; }
+  .pm small { display:block; color:var(--dim); font-size:.75rem; font-weight:400; }
+  @media (prefers-reduced-motion:no-preference) { .track { animation:scrollx 40s linear infinite; } .marquee:hover .track { animation-play-state:paused; } }
+  @media (prefers-reduced-motion:reduce) { .marquee { overflow-x:auto; } }
+  @keyframes scrollx { to { transform:translateX(calc(-50% - 7px)); } }
+
   a:focus-visible, .btn:focus-visible { outline:3px solid var(--yellow); outline-offset:3px; }
   @media (min-width:720px) { .about { grid-template-columns:200px 1fr; } .grid { grid-template-columns:1fr 1fr; } #links { grid-template-columns:1fr 1fr; } section { padding:88px 0; } }
   @media (prefers-reduced-motion:no-preference) { .hero .wrap > * { animation:up .6s both; } .hero .wrap > *:nth-child(2) { animation-delay:.08s; } .hero .wrap > *:nth-child(3) { animation-delay:.16s; } .hero .wrap > *:nth-child(4) { animation-delay:.24s; } .hero .wrap > *:nth-child(5) { animation-delay:.32s; } }
@@ -86,6 +178,14 @@
 </style>
 </head>
 <body>
+<div id="progress"></div>
+<button id="menu-btn" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
+<div id="overlay"></div>
+<nav id="menu" aria-label="Menu principal">
+  <a href="#apropos">À propos</a><a href="#services">Mes services</a><a href="#sites">Sites web &amp; tarifs</a><a href="#realisations" id="nav-real">Réalisations</a><a href="#temoignages" id="nav-tem" hidden>Témoignages</a><a href="#faq">FAQ</a><a href="#contact">Contact</a>
+  <a id="cta-main" class="btn y" href="#contact">Me contacter</a>
+</nav>
+<a id="wa-float" class="wa-float" href="#contact" aria-label="Écrire sur WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M12 2a10 10 0 0 0-8.6 15L2 22l5.1-1.3A10 10 0 1 0 12 2Zm5.2 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.2-.7-2.7-1.1-4.4-3.8-4.5-4-.1-.2-1.1-1.4-1.1-2.7s.7-1.9.9-2.2c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l2 1c.3.1.5.2.6.3.1.2.1.8-.1 1.4Z"/></svg></a>
 
 <header class="hero">
   <div class="wrap">
@@ -93,10 +193,6 @@
       <p class="tag">Cotonou · Bénin</p>
       <h1>Eric <span>Kpakpo</span></h1>
       <p class="lead">Marketing digital, e-commerce et développement web. Je forme et j’accompagne ceux qui veulent vendre en ligne.</p>
-      <div class="cta">
-        <a id="cta-main" class="btn y" href="#contact">Me contacter</a>
-        <a class="btn o" href="#services">Voir mes services</a>
-      </div>
     </div>
   </div>
 </header>
@@ -114,6 +210,8 @@
       </div>
     </div>
   </section>
+
+  <section id="chiffres" style="padding:40px 0"><div class="wrap"><div class="grid" id="stats"></div></div></section>
 
   <section id="services">
     <div class="wrap">
@@ -146,10 +244,16 @@
     <div class="wrap">
       <h2>Création de sites web</h2>
       <p class="dim">Des sites rapides, sur mesure et adaptés au mobile. Choisis le pack qui correspond à ton activité.</p>
+      <div class="card launch"><h3>🔥 Offre de lancement</h3><p>-20 % sur le Pack Basique pour mes premiers clients : <b>40.000 F au lieu de 50.000 F</b>. <b id="left">Places limitées</b></p></div>
       <div class="grid packs">
         <article class="card pack"><h3>Pack Basique</h3><p>Pour démarrer ta présence en ligne.</p><div class="price">50.000 <small>F CFA</small></div><ul><li>1 à 3 pages (Accueil, Services, Contact)</li><li>Design adapté au mobile</li><li>Bouton WhatsApp + formulaire de contact</li><li>Mise en ligne incluse</li><li>1 série de modifications après livraison</li><li>Délai : 5 à 7 jours</li></ul><a class="btn y pack-cta" data-pack="Pack Basique" href="#contact">Choisir ce pack</a></article>
         <article class="card pack star"><span class="flag">Le plus choisi</span><h3>Pack Standard</h3><p>Pour attirer des clients grâce à Google.</p><div class="price">120.000 <small>F CFA</small></div><ul><li>Jusqu’à 6 pages (Galerie, À propos, Témoignages)</li><li>Google Maps et réseaux sociaux</li><li>SEO de base + Google Search Console</li><li>Fiche Google Business configurée</li><li>2 séries de modifications</li><li>1 mois de support offert</li><li>Délai : 10 à 14 jours</li></ul><a class="btn y pack-cta" data-pack="Pack Standard" href="#contact">Choisir ce pack</a></article>
-        <article class="card pack"><h3>Pack Premium</h3><p>Pour les entreprises qui veulent se démarquer.</p><div class="price">300.000 <small>F CFA</small></div><ul><li>Jusqu’à 10 pages, design sur mesure + animations</li><li>Catalogue produits avec commande WhatsApp</li><li>Rédaction des textes incluse</li><li>Modification autonome via CMS + formation 1 h</li><li>Nom de domaine + hébergement la 1re année</li><li>Statistiques de visite</li><li>6 mois de support offerts</li><li>Délai : 3 semaines</li></ul><a class="btn y pack-cta" data-pack="Pack Premium" href="#contact">Choisir ce pack</a></article>
+        <article class="card pack"><h3>Pack Premium</h3><p>Pour les entreprises qui veulent se démarquer.</p><div class="price">300.000 <small>F CFA</small></div><ul><li>Jusqu’à 10 pages, design sur mesure + animations</li><li>Google Maps et réseaux sociaux</li><li>SEO de base + Google Search Console</li><li>Fiche Google Business configurée</li><li>Catalogue produits avec commande WhatsApp</li><li>Rédaction des textes incluse</li><li>Modification autonome via CMS + formation 1 h</li><li>Nom de domaine + hébergement la 1re année</li><li>Statistiques de visite</li><li>6 mois de support offerts</li><li>Délai : 3 semaines</li></ul><a class="btn y pack-cta" data-pack="Pack Premium" href="#contact">Choisir ce pack</a></article>
+      </div>
+      <h3 class="sub">Packs combinés</h3>
+      <div class="grid">
+        <article class="card pack"><h3>Site web + Formation Facebook Ads</h3><p>Ton site, puis je t’apprends à lancer tes campagnes pour attirer des clients.</p><div class="price"><small>Sur devis</small></div><a class="btn y pack-cta" data-pack="Site web + Formation Facebook Ads" href="#contact">Demander un devis</a></article>
+        <article class="card pack"><h3>Site web + Gestion de pages</h3><p>Ton site et l’animation de tes pages (Facebook, TikTok) pour rester visible.</p><div class="price"><small>Sur devis</small></div><a class="btn y pack-cta" data-pack="Site web + Gestion de pages" href="#contact">Demander un devis</a></article>
       </div>
       <h3 class="sub">Autres projets sur mesure</h3>
       <div class="grid packs">
@@ -165,6 +269,7 @@
         <h3>Nom de domaine et serveur</h3>
         <p><b>Nom de domaine : 5.000 F</b> pour la première année.<br><b>Serveur :</b> cela dépend du projet. Un petit site est hébergé gratuitement. Un site avec base de données demande un serveur payant, à partir de <b>50.000 F/an</b>.</p>
       </div>
+      <div class="payzone"><p class="dim" style="margin:0 0 10px"><b style="color:var(--white)">Moyens de paiement acceptés</b> : Mobile Money de la sous-région et cartes bancaires.</p><div class="marquee" aria-label="Moyens de paiement"><div class="track" id="pay-track"></div></div></div>
       <div class="card rules">
         <h3>À savoir</h3>
         <ul>
@@ -177,90 +282,13 @@
     </div>
   </section>
 
+  <section id="realisations"><div class="wrap"><h2>Réalisations</h2><p class="dim">Quelques projets que j’ai réalisés.</p><div class="grid" id="projects"></div></div></section>
+
+  <section id="temoignages" hidden><div class="wrap"><h2>Témoignages</h2><div class="grid" id="quotes"></div></div></section>
+
   <section id="pourquoi">
     <div class="wrap">
       <h2>Pourquoi nous choisir</h2>
       <p class="dim">Des services de qualité, à la portée de tous.</p>
       <div class="grid">
-        <article class="card"><span class="n">7/7</span><h3>Disponibles 7j/7</h3><p>Nous sommes disponibles tous les jours de la semaine, y compris le week-end. Écris-nous quand tu veux.</p></article>
-        <article class="card"><span class="n">$</span><h3>Des prix accessibles</h3><p>Nos services ne sont pas chers. Tu obtiens un travail sérieux sans casser ta trésorerie.</p></article>
-        <article class="card"><span class="n">⚡</span><h3>Réponse rapide</h3><p>Tu as une question ou un projet ? Nous te répondons vite, directement sur WhatsApp.</p></article>
-        <article class="card"><span class="n">✓</span><h3>Accompagnement et suivi</h3><p>Nous restons à tes côtés avant, pendant et après la formation ou le projet.</p></article>
-        <article class="card"><span class="n">🎯</span><h3>Formation pas à pas</h3><p>Des explications simples et concrètes, adaptées aux débutants comme aux entrepreneurs déjà lancés.</p></article>
-        <article class="card"><span class="n">★</span><h3>Travail sur mesure</h3><p>Chaque site, chaque campagne et chaque stratégie sont pensés selon ton activité et ton budget.</p></article>
-      </div>
-    </div>
-  </section>
-
-  <section id="contact">
-    <div class="wrap">
-      <h2>Contact</h2>
-      <p>Tu as un projet, ou tu veux te former ? Écris-nous, nous sommes disponibles 7j/7 et nous te répondons rapidement.</p>
-      <ul id="links"></ul>
-    </div>
-  </section>
-</main>
-
-<footer><div class="wrap">
-  <div class="badges"><span>✔ Disponibles 7j/7</span><span>✔ Prix accessibles</span><span>✔ Réponse rapide</span></div>
-  © <span id="year"></span> Eric Kpakpo · Cotonou
-</div></footer>
-
-<script>
-// ===== À COMPLÉTER : tes coordonnées. Laisse '' pour masquer un élément. =====
-const CONTACT = {
-  whatsapp: '2290151762341',   // lien WhatsApp ou numéro (chiffres avec indicatif)
-  phone: '',      // ex : '+229 01 XX XX XX XX'
-  email: '',
-  facebook: 'https://www.facebook.com/profile.php?id=61595605702706',
-  youtube: '',
-  tiktok: 'https://www.tiktok.com/@digital55237'
-};
-// ==========================================================================
-
-const ITEMS = [
-  ['whatsapp', 'WhatsApp', (v) => /^https?:/.test(v) ? v : 'https://wa.me/' + v.replace(/\D/g, '') + '?text=' + encodeURIComponent('Bonjour Eric, je te contacte depuis ton site.'), () => 'Écrire sur WhatsApp'],
-  ['phone', 'Téléphone', (v) => 'tel:' + v.replace(/\s/g, ''), (v) => v],
-  ['email', 'E-mail', (v) => 'mailto:' + v, (v) => v],
-  ['facebook', 'Facebook', (v) => v, () => 'Ma page Facebook'],
-  ['youtube', 'YouTube', (v) => v, () => 'Ma chaîne YouTube'],
-  ['tiktok', 'TikTok', (v) => v, () => 'Mon compte TikTok'],
-];
-
-const ICONS = {
-  whatsapp: ['#25d366', 'M12 2a10 10 0 0 0-8.6 15L2 22l5.1-1.3A10 10 0 1 0 12 2Zm5.2 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.2-.7-2.7-1.1-4.4-3.8-4.5-4-.1-.2-1.1-1.4-1.1-2.7s.7-1.9.9-2.2c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l2 1c.3.1.5.2.6.3.1.2.1.8-.1 1.4Z'],
-  facebook: ['#1877f2', 'M24 12a12 12 0 1 0-13.9 11.9v-8.4H7.1V12h3V9.4c0-3 1.8-4.7 4.5-4.7 1.3 0 2.7.2 2.7.2v3h-1.5c-1.5 0-2 .9-2 1.9V12h3.4l-.5 3.5h-2.9v8.4A12 12 0 0 0 24 12Z'],
-  tiktok: ['#ffffff', 'M19.6 6.7a5 5 0 0 1-3.9-4.2V2h-3.5v13.4a2.9 2.9 0 1 1-2-2.8V9a6.4 6.4 0 1 0 5.5 6.4V8.6a8.4 8.4 0 0 0 4.9 1.6V6.7Z'],
-  youtube: ['#ff0033', 'M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8ZM9.6 15.6V8.4l6.2 3.6-6.2 3.6Z'],
-  phone: ['#ffd60a', 'M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.6 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.3.2 2.5.6 3.6a1 1 0 0 1-.25 1l-2.25 2.2Z'],
-  email: ['#2f80ff', 'M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4-8 5-8-5V6l8 5 8-5v2Z']
-};
-
-const list = document.getElementById('links');
-for (const [key, label, href, text] of ITEMS) {
-  const v = (CONTACT[key] || '').trim();
-  if (!v) continue;
-  const li = document.createElement('li'), a = document.createElement('a'), b = document.createElement('b'), s = document.createElement('span');
-  a.className = 'link'; a.href = href(v); b.textContent = label; s.textContent = text(v);
-  if (/^https?:/.test(a.href)) { a.target = '_blank'; a.rel = 'noopener'; }
-  const ic = ICONS[key];
-  if (ic) { const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg'), path = document.createElementNS('http://www.w3.org/2000/svg', 'path'); svg.setAttribute('viewBox', '0 0 24 24'); svg.setAttribute('aria-hidden', 'true'); path.setAttribute('d', ic[1]); path.setAttribute('fill', ic[0]); svg.append(path); a.append(svg); }
-  const t = document.createElement('div'); t.append(b, s); a.append(t); li.append(a); list.append(li);
-}
-if (!list.children.length) list.innerHTML = '<li class="dim">Coordonnées bientôt disponibles.</li>';
-
-if (CONTACT.whatsapp) {
-  const m = document.getElementById('cta-main');
-  m.href = /^https?:/.test(CONTACT.whatsapp) ? CONTACT.whatsapp : 'https://wa.me/' + CONTACT.whatsapp.replace(/\D/g, ''); m.textContent = 'Écrire sur WhatsApp'; m.target = '_blank'; m.rel = 'noopener';
-}
-document.querySelectorAll('.pack-cta').forEach((a) => {
-  if (!CONTACT.whatsapp) return;
-  const base = /^https?:/.test(CONTACT.whatsapp) ? CONTACT.whatsapp : 'https://wa.me/' + CONTACT.whatsapp.replace(/\D/g, '');
-  const msg = 'Bonjour Eric, je suis intéressé par le ' + a.dataset.pack + ' (création de site web).';
-  a.href = base + (base.includes('?') ? '&' : '?') + 'text=' + encodeURIComponent(msg);
-  a.target = '_blank'; a.rel = 'noopener';
-});
-document.getElementById('year').textContent = new Date().getFullYear();
-</script>
-</body>
-</html>
+        <article class="card"><span class="n">7/7</span><h3>Disponibles 7j/7</h
